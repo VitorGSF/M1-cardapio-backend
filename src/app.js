@@ -35,5 +35,5 @@ app.use('/cliente', ClienteRoute)
 app.use('/pagamento', Pagamento)
 
 app.listen(process.env.PORT, () => {
-    console.log('APP listening at http://localhost:3000')
+    console.log(`APP listening at http://localhost:${process.env.PORT}`)
 })
