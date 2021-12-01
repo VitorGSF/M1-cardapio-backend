@@ -156,6 +156,30 @@ routerEmpresa.patch('/adicionar-produto/:id', (req, res) => {
     })
 })
 
+routerEmpresa.delete('/remover-produto/:id/:idProduto', (req, res) => {
+    Empresa.findById(req.params.id, (err, doc) => {
+        doc.produtos.forEach( (elemento, indice) => {
+            if(elemento._id.toString() == req.params.idProduto.toString()) {
+                doc.produtos.splice(indice, 1)
+            }
+        })
+
+        const resp = jwt.verify(doc.senha, 'Salt&Pepper')
+        doc.senha = resp.senha
+
+        doc.save( (errSave) => {
+            if (errSave) {
+                response.status(422).send({
+                    add: false,
+                    error: 'Não foi possível completar a sua requisição'
+                })
+            } else {
+                res.status(201).send(doc)
+            }
+        })
+    })
+})
+
 routerEmpresa.put('/alterar/:id', (req, res) => {
     const empresa = {
         razaoSocial: req.body.razaoSocial,

@@ -8,7 +8,7 @@ routerPagamento.post('/pagar', async (req, res) => {
 
     
     const payment_data = {
-        transaction_amount: req.body.transactionAmount,
+        transaction_amount: Number(req.body.transactionAmount),
         token: req.body.payload.token,
         description: req.body.payload.description,
         installments: Number(req.body.payload.installments),
@@ -18,7 +18,7 @@ routerPagamento.post('/pagar', async (req, res) => {
             email: req.body.payload.email,
             identification: {
                 type: req.body.payload.docType,
-                number: req.body.payload.docNumber
+                number: Number(req.body.payload.docNumber)
             }
         }
     }
