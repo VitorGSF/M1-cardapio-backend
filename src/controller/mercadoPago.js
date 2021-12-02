@@ -6,11 +6,9 @@ const mercadopago = require('mercadopago')
 routerPagamento.post('/pagar', async (req, res) => {
     mercadopago.configurations.setAccessToken('TEST-2069736386372447-112418-9e0643448a23c729ce7d65d9002f9e76-436406584')
 
-    
     const payment_data = {
         transaction_amount: Number(req.body.transactionAmount),
         token: req.body.payload.token,
-        description: req.body.payload.description,
         installments: Number(req.body.payload.installments),
         payment_method_id: 'visa',
         issuer_id: req.body.payload.issuer,
@@ -18,7 +16,7 @@ routerPagamento.post('/pagar', async (req, res) => {
             email: req.body.payload.email,
             identification: {
                 type: req.body.payload.docType,
-                number: Number(req.body.payload.docNumber)
+                number: req.body.payload.docNumber
             }
         }
     }
@@ -35,4 +33,3 @@ routerPagamento.post('/pagar', async (req, res) => {
 })
 
 module.exports = routerPagamento
-

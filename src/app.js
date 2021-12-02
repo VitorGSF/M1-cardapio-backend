@@ -1,4 +1,3 @@
-require('dotenv').config()
 const mongoose = require('mongoose')
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -35,6 +34,6 @@ app.use('/pedido', PedidoRoute)
 app.use('/cliente', ClienteRoute)
 app.use('/pagamento', Pagamento)
 
-app.listen(process.env.PORT, () => {
-    console.log(`APP listening at ${process.env.PORT}`)
+app.listen(3000, () => {
+    console.log('APP listening at http://localhost:3000')
 })
